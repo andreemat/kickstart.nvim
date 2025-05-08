@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -100,6 +100,8 @@ vim.g.have_nerd_font = false
 
 -- Make line numbers default
 vim.opt.number = true
+vim.opt.relativenumber = true
+
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 -- vim.opt.relativenumber = true
@@ -167,6 +169,8 @@ vim.opt.confirm = true
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -1006,3 +1010,19 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+--
+vim.g.clipboard = {
+  name = 'win32yank-wsl',
+  copy = {
+    ['+'] = 'win32yank.exe -i --crlf',
+    ['*'] = 'win32yank.exe -i --crlf',
+  },
+  paste = {
+    ['+'] = 'win32yank.exe -o --lf',
+    ['*'] = 'win32yank.exe -o --lf',
+  },
+  cache_enabled = 0,
+}
+
+--
